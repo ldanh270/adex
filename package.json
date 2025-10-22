@@ -8,6 +8,7 @@
         "clean": "npx hardhat clean",
         "node": "npx hardhat node",
         "run": "npx hardhat run scripts/deploy.ts",
+        "help": "npx hardhat --help",
         "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost"
     },
     "devDependencies": {
