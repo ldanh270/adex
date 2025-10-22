@@ -27,8 +27,7 @@ describe('Counter', function () {
 
         let total = 0n
         for (const event of events) {
-            const e = event as EventLog
-            const { by } = e.args
+            const { by } = event.args
             total += by
         }
 
