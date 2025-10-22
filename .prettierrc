@@ -1,19 +1,25 @@
 {
-    "arrowParens": "always",
-    "bracketSameLine": false,
-    "bracketSpacing": true,
-    "embeddedLanguageFormatting": "auto",
-    "htmlWhitespaceSensitivity": "css",
-    "insertPragma": false,
-    "jsxSingleQuote": false,
     "printWidth": 100,
-    "proseWrap": "preserve",
-    "quoteProps": "as-needed",
-    "requirePragma": false,
-    "semi": false,
     "singleQuote": true,
     "tabWidth": 4,
     "trailingComma": "all",
-    "useTabs": false,
-    "vueIndentScriptAndStyle": false
+    "arrowParens": "always",
+    "plugins": ["prettier-plugin-solidity"],
+
+    "overrides": [
+        {
+            "files": "*.sol",
+            "options": {
+                "semi": true,
+                "tabWidth": 4
+            }
+        },
+        {
+            "files": ["*.ts", "*.js"],
+            "options": {
+                "semi": false,
+                "tabWidth": 4
+            }
+        }
+    ]
 }
