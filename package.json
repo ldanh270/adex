@@ -2,6 +2,14 @@
     "name": "adex",
     "version": "1.0.0",
     "type": "module",
+    "scripts": {
+        "compile": "npx hardhat compile",
+        "test": "npx hardhat test",
+        "clean": "npx hardhat clean",
+        "node": "npx hardhat node",
+        "run": "npx hardhat run scripts/deploy.ts",
+        "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost"
+    },
     "devDependencies": {
         "@nomicfoundation/hardhat-ignition": "^3.0.3",
         "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.0",
