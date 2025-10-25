@@ -23,6 +23,10 @@ contract DSBank {
     uint private liquidityPool;
     mapping(address => User) listUsers;
 
+    function showPoolBalances() external view returns (uint) {
+        return liquidityPool;
+    }
+
     function deposit() external payable {
         // VALIDATE
         require((msg.value > 0), 'Deposit must be greater than 0.');
