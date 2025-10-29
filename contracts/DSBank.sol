@@ -20,7 +20,7 @@ contract DSBank is Status {
         return liquidityPool;
     }
 
-    function deposit() external payable {
+    function lending() external payable {
         // VALIDATE
         require((msg.value > 0), 'Deposit value must be greater than 0.');
 
