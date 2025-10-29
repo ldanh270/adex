@@ -4,25 +4,16 @@ pragma solidity 0.8.30;
 import {Status} from '../events/Status.sol';
 
 contract DSBank is Status {
+    // Defi user
     struct User {
         uint totalLend;
         uint totalBorrow;
-        DepositPayment[] depositPayments;
-        BorrowPayment[] borrowPayments;
     }
 
-    struct DepositPayment {
-        uint amount;
-        uint depositTime;
-    }
-
-    struct BorrowPayment {
-        uint collateral;
-        uint amount;
-        uint borrowTime;
-    }
-
+    // Total Liquidity Pool
     uint private liquidityPool;
+
+    // List of users
     mapping(address => User) users;
 
     function showPoolBalances() external view returns (uint) {
@@ -31,25 +22,35 @@ contract DSBank is Status {
 
     function deposit() external payable {
         // VALIDATE
-        require((msg.value > 0), 'Deposit must be greater than 0.');
+        require((msg.value > 0), 'Deposit value must be greater than 0.');
 
         // DEPOSIT
         User storage user = users[msg.sender];
 
-        // Add user payment
-        DepositPayment memory payment = DepositPayment({
-            amount: msg.value,
-            depositTime: block.timestamp
-        });
-        user.depositPayments.push(payment);
-
         // Change user balances
-        user.totalLend += payment.amount;
+        user.totalLend += msg.value;
 
         // Update global pool
-        liquidityPool += payment.amount;
+        liquidityPool += msg.value;
 
-        // NOTICE
+        // Emit notification
         emit Sucess(Method.Deposit, msg.sender, msg.value);
+    }
+
+    function withdraw(uint _amount) external payable {
+        // VALIDATE
+        require(_amount <= users[msg.sender].totalLend, 'Insufficient balances');
+
+        // WITHDRAW
+        User storage user = users[msg.sender];
+
+        // Change user balances
+        user.totalLend -= _amount;
+
+        // Update global pool
+        liquidityPool -= _amount;
+
+        // Emit notification
+        emit Sucess(Method.Withdraw, msg.sender, _amount);
     }
 }
