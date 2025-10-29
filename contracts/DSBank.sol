@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.30;
 
-contract DSBank {
+import {Status} from '../events/Status.sol';
+
+contract DSBank is Status {
     struct User {
         uint totalLend;
         uint totalBorrow;
@@ -46,5 +48,8 @@ contract DSBank {
 
         // Update global pool
         liquidityPool += payment.amount;
+
+        // NOTICE
+        emit Sucess(Method.Deposit, msg.sender, msg.value);
     }
 }
