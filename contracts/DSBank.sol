@@ -23,7 +23,7 @@ contract DSBank is Status {
     }
 
     uint private liquidityPool;
-    mapping(address => User) listUsers;
+    mapping(address => User) users;
 
     function showPoolBalances() external view returns (uint) {
         return liquidityPool;
@@ -34,7 +34,7 @@ contract DSBank is Status {
         require((msg.value > 0), 'Deposit must be greater than 0.');
 
         // DEPOSIT
-        User storage user = listUsers[msg.sender];
+        User storage user = users[msg.sender];
 
         // Add user payment
         DepositPayment memory payment = DepositPayment({
